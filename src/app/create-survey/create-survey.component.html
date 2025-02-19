@@ -1,0 +1,32 @@
+<div>
+  <div class="create-survey-header">
+    <span>Create Survey</span>
+    <div class="create-survey-header-btn-container">
+      <button class="create-survey-btn" #preview routerLink="../preview" (click)="previewData()">Preview</button
+      ><button class="discard-survey-btn" routerLink="../">Discard</button>
+    </div>
+  </div>
+  <div class="form" [formGroup]="surveyData">
+  <div class="create-survey-title-card">
+    <input
+      type="text"
+      class="create-survey-title-card-title border"
+      placeholder="Title"
+      formControlName="title"
+    />
+    <textarea
+      class="create-survey-title-card-description border"
+      placeholder="Description"
+      formControlName="description"
+    ></textarea>
+  </div>
+
+  <div formArrayName="questions">
+      <app-question-card *ngFor="let question of questions.controls; let i = index" [form]="getQuestion(i)" (delete)="removeQuestion(i)">
+      </app-question-card>
+  </div>
+
+  <button class="add-question" (click)="addQuestion()">Add Question</button>
+</div>
+
+</div>

@@ -1,0 +1,17 @@
+<div class="admin-container">
+  <div class="admin-header">
+    <span class="admin-header-title">Survey Master</span>
+    <div class="profile" [attr.data-avatar]="user.charAt(0).toUpperCase()"><p>{{user}}</p></div>
+    <div class="flex-spb">
+      <div class="tooltip">
+        <button class="create-survey-btn" routerLink="./create-survey">New</button
+        ><span class="tooltiptext">Create Survey</span>
+      </div>
+      <button class="discard-survey-btn" routerLink="../login">Logout</button>
+    </div>
+  </div>
+  <div class="admin-main">
+    <app-form-card *ngFor="let survey of surveys; let i = index" [source]="imgs[i % 5]" [surveyData]="survey" [role]="role" (delete)="fetchSurveys()"></app-form-card>
+  </div>
+</div>
+

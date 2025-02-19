@@ -1,0 +1,15 @@
+<div class="form-card">
+  <div class="form-card-image-container">
+    <img class="form-card-img" [src]="source" />
+  </div>
+  <h2 class="form-card-title">{{surveyData.title}}</h2>
+  <div class="form-card-btn-container" *ngIf=" role === 'admin'">
+    <button class="view-btn">View Responses</button>
+    <button class="delete-btn" (click)="deleteSurvey()">Delete</button>
+    <label class="toggle-switch">
+      <input type="checkbox" class="required" hidden="true" [checked]="surveyData.active" #status/>
+      <span class="toggle" (click)="changeStatus(status.checked)"></span>
+    </label>
+  </div>
+</div>
+

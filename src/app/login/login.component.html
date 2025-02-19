@@ -1,0 +1,30 @@
+<div class="login-card">
+  <input
+    type="text"
+    class="input-option border"
+    placeholder="User Name"
+    autofocus="true"
+    [(ngModel)]="userName"
+  />
+  <div class="con">
+    <div class="radio-group">
+      <label class="radio-label">
+        <input
+          type="radio"
+          name="role"
+          value="user"
+          [(ngModel)]="role"
+          checked
+        />
+        USER
+      </label>
+      <label class="radio-label">
+        <input type="radio" name="role" value="admin" [(ngModel)]="role" />
+        ADMIN
+      </label>
+      <div class="bg"></div>
+    </div>
+
+    <button class="create-survey-btn" (click)="changeUser()" routerLink="../{{ role }}">Login</button>
+  </div>
+</div>

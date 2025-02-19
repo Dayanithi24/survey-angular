@@ -1,0 +1,179 @@
+<div class="question-card" [formGroup]="form">
+  <div class="question-card-header">
+    <textarea
+      class="question-card-question border"
+      required="false"
+      placeholder="Question"
+      formControlName="question"
+    ></textarea
+    ><select class="question-card-dropdown border" formControlName="inputType">
+      <option value="multiple choice">mcq</option>
+      <option value="checkbox">checkbox</option>
+      <option value="text">text</option>
+      <option value="date">date</option>
+      <option value="number">number</option>
+      <option value="time">time</option>
+      <option value="file">file</option>
+    </select>
+  </div>
+  <div class="question-card-main">
+    <div class="question-card-input-area-container">
+      
+      <div *ngIf="form.get('inputType')?.value === 'multiple choice' || form.get('inputType')?.value === 'checkbox'" class="question-card-input-area" formArrayName="options">
+         <div *ngFor="let option of options.controls; let i = index;" class="input-container">
+          <div [class.radio-btn]="form.get('inputType')?.value === 'multiple choice'" [class.checkbox]="form.get('inputType')?.value === 'checkbox'"></div>
+          <input type="text" class="input-option border" placeholder="Option" [formControlName]="i">
+          <button (click)="removeOption(i)" class="decrementor">-</button>
+        </div>
+        <button (click)="addOption()" class="incrementor">+</button>
+      </div>
+
+      <div *ngIf="form.get('inputType')?.value === 'text'" class="question-card-input-area">
+        <div class="input-type-text">
+          <input
+            type="text"
+            class="input-option border"
+            placeholder="Text"
+            disabled="true"
+            required="false"
+          />
+          <div class="length-container">
+            <label>Text Length : </label
+            ><input
+              type="number"
+              placeholder="Minimum"
+              class="text-length border"
+              min="0"
+              required="true"
+              formControlName="minimum_value"
+            /><label>to</label
+            ><input
+              type="number"
+              placeholder="Maximum"
+              class="text-length border"
+              required="true"
+              formControlName="maximum_value"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="form.get('inputType')?.value === 'number'" class="question-card-input-area">
+        <div class="input-type-number">
+          <input
+            type="text"
+            class="input-option border"
+            placeholder="Number"
+            disabled="true"
+            required="false"
+          />
+          <div class="length-container">
+            <label>Range : </label
+            ><input
+              type="number"
+              placeholder="Minimum"
+              class="text-length border"
+              required="true"
+              formControlName="minimum_value"
+            /><label>to</label
+            ><input
+              type="number"
+              placeholder="Maximum"
+              class="text-length border"
+              required="true"
+              formControlName="maximum_value"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="form.get('inputType')?.value === 'date'" class="question-card-input-area">
+        <div class="input-type-date">
+          <input
+            type="text"
+            class="input-option border"
+            placeholder="Date,Month, Year"
+            required="false"
+            disabled="true"
+          />
+        </div>
+      </div>
+
+      <div *ngIf="form.get('inputType')?.value === 'time'" class="question-card-input-area">
+        <div class="input-type-time">
+          <input
+            type="text"
+            class="input-option border"
+            placeholder="Time"
+            required="false"
+            disabled="true"
+          />
+        </div>
+      </div>
+
+      <div *ngIf="form.get('inputType')?.value === 'file'" class="question-card-input-area">
+        <div class="input-type-file">
+          <div class="file-input-container">
+            <label>File Types : </label
+            ><input
+              type="Text"
+              [value]="fileFormats" (input)="getFileFormat($event)"
+              placeholder="pdf,jpg,doc"
+              class="input-option border"
+              required="false"
+              style="width: 50%"
+              formControlName="file_formats"
+            />
+          </div>
+          <div class="file-input-container">
+            <label>Maximum number of files : </label
+            ><input
+              type="number"
+              class="input-option border"
+              min="1"
+              required="false"
+              formControlName="maximum_number_of_files"
+            />
+          </div>
+          <div class="file-input-container">
+            <label>Maximum file size : </label
+            ><input
+              type="Text"
+              placeholder="500KB"
+              class="input-option border"
+              required="false"
+              formControlName="maximum_file_size"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="question-card-message-container">
+      <input
+        type="text"
+        class="msg-input border"
+        placeholder="Support Message"
+        required="false"
+        formControlName="support_message"
+      /><input
+        type="text"
+        class="msg-input border"
+        placeholder="Error Message"
+        required="false"
+        formControlName="error_message"
+      />
+    </div>
+  </div>
+  <div class="question-card-footer">
+    <button class="delete-question" (click)="deleteCard()">Delete</button>
+    <div class="required-container">
+      <label>Required</label
+      ><label class="toggle-switch"
+        ><input type="checkbox" class="required" hidden="true" formControlName="required"/><span
+          class="toggle"
+        ></span
+      ></label>
+    </div>
+  </div>
+</div>

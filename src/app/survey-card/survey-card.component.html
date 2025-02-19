@@ -1,0 +1,18 @@
+<div class="new-survey-card">
+  <p class="new-survey-card-question">{{question.question_num + ') ' + question.question}}</p>
+  <div class="input-area" *ngIf="inputType === 'radio' || inputType === 'checkbox'">
+    <div class="input-container" *ngFor="let option of question.options; let i = index">
+        <input 
+        [type]="inputType" 
+        [class]="'form-input-' + inputType" 
+        [value]="option" [id]="'option-' + inputType + '-' + i" 
+        [name]="question.question"
+        >
+        <label [for]="'option-' + inputType + '-' + i" >{{option}}</label>
+    </div>
+  </div>
+  <div class="input-area" *ngIf="['text', 'number', 'date', 'time', 'file'].includes(inputType)">
+      <input [type]="inputType" [class]="'form-input-' + inputType">
+  </div>
+  <p class="support-msg">{{question.support_message}}</p>
+</div>

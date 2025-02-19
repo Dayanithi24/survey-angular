@@ -1,0 +1,10 @@
+<div>
+  <div class="new-survey-title-card">
+    <h1 class="new-survey-title-card-title">{{surveyData.title}}</h1>
+    <p class="new-survey-title-card-description">{{surveyData.description}}</p>
+  </div>
+  <div class="survey-questions">
+    <app-survey-card *ngFor="let ques of surveyData.questions;" [question]="ques"></app-survey-card>
+  </div>
+  <button class="add-question" (click)="createSurvey()">Create Survey</button>
+</div>
