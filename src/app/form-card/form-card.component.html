@@ -1,10 +1,10 @@
 <div class="form-card">
-  <div class="form-card-image-container">
+  <div class="form-card-image-container" (click)="loadSurvey(surveyData.id)">
     <img class="form-card-img" [src]="source" />
   </div>
-  <h2 class="form-card-title">{{surveyData.title}}</h2>
+  <h2 class="form-card-title" (click)="loadSurvey(surveyData.id)">{{surveyData.title}}</h2>
   <div class="form-card-btn-container" *ngIf=" role === 'admin'">
-    <button class="view-btn">View Responses</button>
+    <button class="view-btn" (click)="loadResponse(surveyData.id)">View Responses</button>
     <button class="delete-btn" (click)="deleteSurvey()">Delete</button>
     <label class="toggle-switch">
       <input type="checkbox" class="required" hidden="true" [checked]="surveyData.active" #status/>

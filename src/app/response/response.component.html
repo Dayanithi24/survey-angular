@@ -1,0 +1,52 @@
+<div class="response-page">
+  <div class="response-page-title-container">
+    <span class="admin-header-title">{{surveyData.title}}</span>
+    <p>Survey ID : {{surveyData.id}}</p>
+  </div>
+  <div class="response-page-header">
+    <div class="response-page-header-date-container">
+      <input type="date" id="from-date" class="form-input-date" /><label
+        >To</label
+      ><input type="date" id="to-date" class="form-input-date" /><i
+        aria-hidden="true"
+        class="fa fa-search search-btn"
+      ></i
+      ><i aria-hidden="true" class="fa fa-times close-btn"></i>
+    </div>
+    <div class="response-count-container">
+      <label>Responses per page : </label
+      ><select class="question-card-dropdown border">
+        <option value="5" selected="true">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+  </div>
+  <div class="response-table-container">
+    <table class="response-table">
+      <tr class="response-table-header response-table-row">
+        <th class="response-table-cell">Response ID</th>
+        <th class="response-table-cell">Responded By</th>
+        <th class="response-table-cell">Responded At</th>
+        <th class="response-table-cell" *ngFor="let question of surveyData.questions">{{question.question}}</th>
+    </tr>
+    <tr class="response-table-row" *ngFor="let response of responses">
+        <td class="response-table-cell">{{response.id}}</td>
+        <td class="response-table-cell">{{response.respondedBy}}</td>
+        <td class="response-table-cell">{{response.respondedAt}}</td>
+        <td class="response-table-cell" *ngFor="let key of objectKeys(response.responses)">
+          {{ formatResponse(response.responses[key]) }}
+        </td>
+      </tr>
+      
+    </table>
+  </div>
+  <div class="response-page-footer">
+    <span>Page 1 of 4</span>
+    <div>
+      <i aria-hidden="true" class="fa fa-chevron-left prev-btn"></i
+      ><i aria-hidden="true" class="fa fa-chevron-right next-btn"></i>
+    </div>
+  </div>
+</div>

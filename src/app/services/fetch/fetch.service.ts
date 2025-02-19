@@ -42,7 +42,6 @@ export class FetchService {
   }
 
   createSurvey: Function = (survey: Object) => {
-    console.log('create')
     return this.http.post(`${this.baseUrl}`, JSON.stringify(survey),{
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +49,18 @@ export class FetchService {
       }
     });
   }
-
   
+  createResponse: Function = (response: Object) => {
+    return this.http.post(`${this.baseUrl}response/`, JSON.stringify(response),{
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      }
+    });
+  }
+
+  getResponsesOfSurvey: Function = (id: string, page: number, size: number, from: string, to: string) => {
+    return this.http.get(`${this.baseUrl}response/survey/${id}?page=${page}&size=${size}&from=${from}&to=${to}`);
+  } 
 
 }

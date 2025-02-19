@@ -1,18 +1,42 @@
 <div class="new-survey-card">
-  <p class="new-survey-card-question">{{question.question_num + ') ' + question.question}}</p>
-  <div class="input-area" *ngIf="inputType === 'radio' || inputType === 'checkbox'">
+  <p class="new-survey-card-question">{{questionNum + ') ' + question.question}}</p>
+  <div class="input-area" *ngIf="inputType === 'radio'">
     <div class="input-container" *ngFor="let option of question.options; let i = index">
         <input 
-        [type]="inputType" 
+        type="radio" 
         [class]="'form-input-' + inputType" 
-        [value]="option" [id]="'option-' + inputType + '-' + i" 
-        [name]="question.question"
+        [value]="option" 
+        [id]="'option-' + inputType + '-' + i" 
+        [name]="'question' + questionNum"
+        [formControl]="formCont"
         >
         <label [for]="'option-' + inputType + '-' + i" >{{option}}</label>
     </div>
   </div>
-  <div class="input-area" *ngIf="['text', 'number', 'date', 'time', 'file'].includes(inputType)">
-      <input [type]="inputType" [class]="'form-input-' + inputType">
+
+  <div class="input-area" *ngIf="inputType === 'checkbox'">
+    <div class="input-container" *ngFor="let option of question.options; let i = index">
+        <input 
+        type="checkbox" 
+        [value]="option" 
+        [class]="'form-input-' + inputType" 
+        [id]="'option-' + inputType + '-' + i"
+        (change)="onCheckboxChange($event)"
+        >
+        <label [for]="'option-' + inputType + '-' + i" >{{option}}</label>
+    </div>
+  </div>
+
+  <div class="input-area" *ngIf="inputType === 'file'">
+    <input 
+      type="file"
+      (change)="onFileChange($event)">
+  </div>
+
+  <div class="input-area" *ngIf="['text', 'number', 'date', 'time'].includes(inputType)">
+      <input [type]="inputType" 
+      [class]="'form-input-' + inputType" 
+      [formControl]="formCont">
   </div>
   <p class="support-msg">{{question.support_message}}</p>
 </div>

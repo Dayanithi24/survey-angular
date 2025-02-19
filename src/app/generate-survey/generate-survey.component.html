@@ -1,0 +1,13 @@
+<form [formGroup]="surveyForm" (ngSubmit)="submitSurvey()">
+  <div class="new-survey-title-card">
+    <h1 class="new-survey-title-card-title">{{surveyData.title}}</h1>
+    <p class="new-survey-title-card-description">{{surveyData.description}}</p>
+  </div>
+  <div class="survey-questions">
+    <app-survey-card *ngFor="let ques of surveyData.questions;" [question]="ques" [formCont]="getFormControl('question' + ques.questionNum)"></app-survey-card>
+  </div>
+  <div class="final-survey-btn-container">
+    <input type="reset" class="discard-survey-btn" />
+    <input type="submit" class="create-survey-btn" />
+  </div>
+</form>
