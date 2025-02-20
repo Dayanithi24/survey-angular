@@ -4,18 +4,20 @@
     <p>Survey ID : {{surveyData.id}}</p>
   </div>
   <div class="response-page-header">
-    <div class="response-page-header-date-container">
-      <input type="date" id="from-date" class="form-input-date" /><label
+    <div class="response-page-header-date-container" [formGroup]="dateForm">
+      <input type="date" id="from-date" class="form-input-date" formControlName="fromDate" (change)="updateMinDate()"/><label
         >To</label
-      ><input type="date" id="to-date" class="form-input-date" /><i
+      ><input type="date" id="to-date" class="form-input-date" formControlName="toDate" [min]="minToDate"/>
+      <i
         aria-hidden="true"
         class="fa fa-search search-btn"
+        (click)="onSearch()"
       ></i
-      ><i aria-hidden="true" class="fa fa-times close-btn"></i>
+      ><i aria-hidden="true" class="fa fa-times close-btn" (click)="onReset()"></i>
     </div>
     <div class="response-count-container">
       <label>Responses per page : </label
-      ><select class="question-card-dropdown border">
+      ><select class="question-card-dropdown border" (change)="onSizeChange($event)">
         <option value="5" selected="true">5</option>
         <option value="10">10</option>
         <option value="15">15</option>
@@ -31,7 +33,7 @@
         <th class="response-table-cell">Responded At</th>
         <th class="response-table-cell" *ngFor="let question of surveyData.questions">{{question.question}}</th>
     </tr>
-    <tr class="response-table-row" *ngFor="let response of responses">
+    <tr class="response-table-row" *ngFor="let response of responseData.content">
         <td class="response-table-cell">{{response.id}}</td>
         <td class="response-table-cell">{{response.respondedBy}}</td>
         <td class="response-table-cell">{{response.respondedAt}}</td>
@@ -43,10 +45,10 @@
     </table>
   </div>
   <div class="response-page-footer">
-    <span>Page 1 of 4</span>
+    <span>Page {{responseData.empty? page: page + 1}} of {{responseData.totalPages}}</span>
     <div>
-      <i aria-hidden="true" class="fa fa-chevron-left prev-btn"></i
-      ><i aria-hidden="true" class="fa fa-chevron-right next-btn"></i>
+      <i aria-hidden="true" class="fa fa-chevron-left prev-btn" (click)="decrementPage()"></i
+      ><i aria-hidden="true" class="fa fa-chevron-right next-btn" (click)="incrementPage()"></i>
     </div>
   </div>
 </div>
