@@ -38,5 +38,5 @@
       [class]="'form-input-' + inputType" 
       [formControl]="formCont">
   </div>
-  <p class="support-msg">{{question.support_message}}</p>
+  <p class="support-msg">{{question.support_message ?? question.supportMessage}}</p>
 </div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QuestionCardComponent } from '../question-card/question-card.component';
 import { Router, RouterLink } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-survey',
@@ -84,9 +85,42 @@ export class CreateSurveyComponent {
     }
   }
 
+  onClickDiscard() {
+
+    Swal.fire({
+      title: 'Sure?',
+      text: 'Do you want to discard?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Discard',
+      cancelButtonText: 'No, cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['admin/']);
+      }
+    });
+  }
+
   removeQuestion(index: number) {
-    if(this.questions.length > 1)
-      this.questions.removeAt(index);
+    Swal.fire({
+      title: 'Sure?',
+      text: 'Do you want to delete the question?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Delete',
+      cancelButtonText: 'No, cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if(this.questions.length > 1)
+        {
+          this.questions.removeAt(index);
+          Swal.fire({
+            title: "Deleted Successfully",
+            icon: "success",
+          });
+        }
+      }
+    });
   }
 
   previewData(){

@@ -2,7 +2,7 @@
   <div class="admin-header">
     <span class="admin-header-title">Survey Master</span>
     <div class="profile" [attr.data-avatar]="user.charAt(0).toUpperCase()"><p>{{user}}</p></div>
-    <button class="discard-survey-btn" routerLink="../login">Logout</button>
+    <button class="discard-survey-btn" (click)="onClickLogout()">Logout</button>
   </div>
   <div class="admin-main">
     <app-form-card *ngFor="let survey of surveys; let i = index" [source]="imgs[i % 5]" [surveyData]="survey" [role]="role"></app-form-card>

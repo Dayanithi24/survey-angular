@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SurveyCardComponent } from '../survey-card/survey-card.component';
 import { FetchService } from '../services/fetch/fetch.service';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-preview',
@@ -47,10 +48,23 @@ export class PreviewComponent {
   }
 
   createSurvey() {
-    console.log(this.surveyData);
-    this.fetchService.createSurvey(this.surveyData).subscribe((data: any) => {
-      console.log(data);
-      this.router.navigate(['admin/']);
-    });
+      Swal.fire({
+        title: 'Confirm?',
+        text: `Once Submitted, survey can't be chnaged`,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Submit',
+        cancelButtonText: 'No, cancel',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.fetchService.createSurvey(this.surveyData).subscribe((data: any) => {
+            Swal.fire({
+              title: "Survey Created Successfully",
+              icon: "success",
+            });
+            this.router.navigate(['admin/']);
+          });
+        }
+      });
   }
 }

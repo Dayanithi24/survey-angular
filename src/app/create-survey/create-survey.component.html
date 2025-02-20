@@ -3,7 +3,7 @@
     <span>Create Survey</span>
     <div class="create-survey-header-btn-container">
       <button class="create-survey-btn" #preview routerLink="../preview" (click)="previewData()">Preview</button
-      ><button class="discard-survey-btn" routerLink="../">Discard</button>
+      ><button class="discard-survey-btn" (click)="onClickDiscard()">Discard</button>
     </div>
   </div>
   <div class="form" [formGroup]="surveyData">

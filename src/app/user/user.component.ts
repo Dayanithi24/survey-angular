@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormCardComponent } from '../form-card/form-card.component';
 import { ProfileService } from '../services/profile/profile.service';
 import { Subscription } from 'rxjs';
 import { FetchService } from '../services/fetch/fetch.service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user',
@@ -23,7 +24,8 @@ export class UserComponent {
   ];
   constructor(
     private profileService: ProfileService,
-    private fetchService: FetchService
+    private fetchService: FetchService,
+    private router: Router
   ) {}
 
   user!: string;
@@ -45,4 +47,23 @@ export class UserComponent {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
+  onClickLogout() {
+      Swal.fire({
+        title: 'Sure?',
+        text: 'Do you want to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Logout',
+        cancelButtonText: 'No, cancel',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Logged Out Successfully",
+            icon: "success",
+          });
+          this.router.navigate(['login/'])
+        }
+      });
+    }
 }
