@@ -61,11 +61,17 @@ export class FormCardComponent {
         this.fetchService.deleteSurvey(this.surveyData.id)
         .subscribe((data: any) => {
           if(data === 'Deleted Successfully!!'){
-            Swal.fire({
-              title: 'Deleted Successfully!!',
-              icon: 'success',
+            this.fetchService.deleteResponsesOfSurvey(this.surveyData.id)
+            .subscribe((data: any) => {
+              if(data === 'Deleted Successfully!!'){
+                Swal.fire({
+                  title: 'Deleted Successfully!!',
+                  icon: 'success',
+                });
+                this.delete.emit();
+              }
             });
-            this.delete.emit();
+           
           }
         });
       }

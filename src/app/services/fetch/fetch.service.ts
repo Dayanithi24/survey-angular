@@ -63,4 +63,8 @@ export class FetchService {
     return this.http.get(`${this.baseUrl}response/survey/${id}?page=${page}&size=${size}&from=${from}&to=${to}`);
   } 
 
+  deleteResponsesOfSurvey: Function = (id: string) => {
+    return this.http.delete(`${this.baseUrl}response/survey/${id}`,{ responseType: 'text' });
+  }
+
 }

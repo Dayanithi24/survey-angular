@@ -115,6 +115,10 @@ export class GenerateSurveyComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.submitSurvey();
+        Swal.fire({
+          title: 'Submitted Successfully!!',
+          icon: 'success',
+        });
       }
     });
   }
